@@ -1,0 +1,28 @@
+doctype html
+
+html(lang='en')
+
+  head
+
+    meta(charset='UTF-8')
+    meta(http-equiv='x-ua-compatible', content='ie=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no')
+    title='Horizon Boilerplate'
+    meta(name='description', content='Front-End Boilerplate is a starter kit that uses Gulp 4, Express.js, Webpack/Babel/ES6, SASS, PUG and foundation-sites framework')
+    link(rel='icon', type='image/png', href='images/favicon.png')
+    link(rel='stylesheet', href='./styles/app.css')
+
+  body
+
+    block content
+
+    script(src='https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js')
+
+    script.
+      WebFont.load({
+        google: {
+          families: ['Open Sans:300,400']
+        }
+      });
+
+    script(src='./scripts/app.js', async)

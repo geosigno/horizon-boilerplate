@@ -1,0 +1,15 @@
+{
+    "useTabs": false,
+    "printWidth": 100,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "jsxBracketSameLine": false,
+    "semi": true,
+    "overrides": [
+        {
+            "files": "app/sass/**/*.scss",
+            "options": { "tabWidth": 4 }
+        }
+    ]
+}

@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'icon-font';
+    src: url('../fonts/icon-font.woff2') format('woff2'),
+        url('../fonts/icon-font.woff') format('woff'),
+        url('../fonts/icon-font.ttf') format('truetype');
+}
+
+.icon {
+    font-family: 'icon-font';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+    text-transform: none;
+}
+
+@function icon-char($filename) {
+    $char: '';
+
+    @if $filename == chevron-down {
+        $char: '\E001';
+    }
+    @if $filename == chevron-left {
+        $char: '\E002';
+    }
+    @if $filename == chevron-right {
+        $char: '\E003';
+    }
+    @if $filename == chevron-up {
+        $char: '\E004';
+    }
+
+    @return $char;
+}
+
+@mixin icon($filename, $insert: before, $extend: true) {
+    &:#{$insert} {
+        @if $extend {
+            @extend .icon;
+        } @else {
+            @include icon-styles;
+        }
+        content: icon-char($filename);
+    }
+}
+
+.icon-chevron-down {
+    @include icon(chevron-down);
+}
+
+.icon-chevron-left {
+    @include icon(chevron-left);
+}
+
+.icon-chevron-right {
+    @include icon(chevron-right);
+}
+
+.icon-chevron-up {
+    @include icon(chevron-up);
+}
