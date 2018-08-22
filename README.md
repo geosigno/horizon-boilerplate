@@ -1,59 +1,61 @@
-#Horizonte Boilerplate
+# Horizonte Boilerplate
+
 Horizonte Boilerplate is a Front-End starter kit that use Gulp 4, Express.js, Webpack/Babel/ES6, SASS, PUG and foundation-sites framework.
 
-##Install
+## Install
+
 ```sh
 npm install
 ```
 
-##Available tasks
+## Available tasks
 
-###launch the solution
+### launch the solution
 ```sh
 gulp
 ```
 
-###generate JS for development
+### generate JS for development
 ```sh
 gulp devJS
 ```
 
-###generate JS for production
+### generate JS for production
 ```sh
 gulp JS
 ```
 
-###generate CSS for development
+### generate CSS for development
 ```sh
 gulp devSASS
 ```
 
-###generate CSS (and icons) for production
+### generate CSS (and icons) for production
 ```sh
 gulp CSS
 ```
 
-###generate HTML
+### generate HTML
 ```sh
 gulp buildHTML
 ```
 
-###minify ICONS
+### minify ICONS
 ```sh
 gulp minifyICON
 ```
 
-###generate ICONS
+### generate ICONS
 ```sh
 gulp buildICON
 ```
 
-###generate all Medias (CSS, JS & ICON) and ZIP them
+### generate all Medias (CSS, JS & ICON) and ZIP them
 ```sh
 gulp MEDIA
 ```
 
-###deploy build/ folder to FTP server
+### deploy build/ folder to FTP server
 ```sh
 gulp ftp
 ```
