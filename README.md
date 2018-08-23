@@ -1,6 +1,6 @@
-# Horizonte Boilerplate
+# Horizon Boilerplate
 
-Horizonte Boilerplate is a Front-End starter kit that use Gulp 4, Express.js, Webpack/Babel/ES6, SASS, PUG and foundation-sites framework.
+Horizon Boilerplate is a Front-End starter kit that use Gulp 4, Express.js, Webpack/Babel/ES6, SASS, PUG and foundation-sites framework.
 
 ## Install
 
