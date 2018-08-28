@@ -32,6 +32,7 @@ import reporter from 'postcss-reporter';
 import syntax_scss from 'postcss-scss';
 import stylelint from 'stylelint';
 import moment from 'moment';
+import pugLinter from 'gulp-pug-linter';
 
 /*
   Paths
@@ -78,6 +79,18 @@ export function onError(err) {
     console.log(err);
     this.emit('end');
 }
+
+/*
+  PUG Lint
+*/
+const nbErros = function (errors) {
+    if (errors.length) { console.error(errors.length) }
+}
+export const pugLint = () =>
+    gulp
+        .src(['app/pug/**/*.pug'])
+        .pipe(pugLinter())
+        .pipe(pugLinter.reporter())
 
 /*
   convert SASS files to CSS
