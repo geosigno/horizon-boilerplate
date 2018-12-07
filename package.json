@@ -28,6 +28,7 @@
     "dependencies": {
         "body-parser": "^1.18.2",
         "browser-sync": "^2.26.3",
+        "del": "^3.0.0",
         "express": "^4.16.4",
         "gulp-cli": "^2.0.1",
         "lint-staged": "^7.2.2",
@@ -53,6 +54,7 @@
         "gulp-plumber": "^1.2.1",
         "gulp-postcss": "^8.0.0",
         "gulp-pug": "^4.0.1",
+        "gulp-pug-linter": "^0.6.0",
         "gulp-rename": "^1.4.0",
         "gulp-replace": "^1.0.0",
         "gulp-sass": "^4.0.2",

@@ -32,6 +32,8 @@ import reporter from 'postcss-reporter';
 import syntax_scss from 'postcss-scss';
 import stylelint from 'stylelint';
 import moment from 'moment';
+import pugLinter from 'gulp-pug-linter';
+import del from 'del';
 
 /*
   Paths
@@ -78,6 +80,40 @@ export function onError(err) {
     console.log(err);
     this.emit('end');
 }
+
+/*
+  Clear CSS
+*/
+export function clearCSS() {
+    return del(PATHS.DEST.css);
+}
+
+/*
+  Clear JS
+*/
+export function clearJS() {
+    return del(PATHS.DEST.js);
+}
+
+
+/*
+  Clear HTML
+*/
+export function clearHTML() {
+    return del(PATHS.DEST.html);
+}
+
+/*
+  PUG Lint
+*/
+const nbErros = function (errors) {
+    if (errors.length) { console.error(errors.length) }
+}
+export const pugLint = () =>
+    gulp
+        .src(['app/pug/**/*.pug'])
+        .pipe(pugLinter())
+        .pipe(pugLinter.reporter())
 
 /*
   convert SASS files to CSS
@@ -327,14 +363,20 @@ export const watch = () => {
 /*
   TASK: JS Full Process
 */
-const js = gulp.series(updateWebpackConfig, prodJS);
+const js = gulp.series(clearJS, updateWebpackConfig, prodJS);
 gulp.task('JS', js);
 
 /*
   TASK: CSS Full Process
 */
-const css = gulp.series(minifyICON, buildICON, devSASS, prodCSS);
+const css = gulp.series(clearCSS,minifyICON, buildICON, devSASS, prodCSS);
 gulp.task('CSS', css);
+
+/*
+  TASK: HTML Full Process
+*/
+const html = gulp.series(clearHTML, buildHTML);
+gulp.task('HTML', html);
 
 /*
   TASK: Generate All Medias and ZIP them
@@ -345,7 +387,7 @@ gulp.task('MEDIA', media);
 /*
   TASK: Send all build Folder to FTP
 */
-const ftpProcess = gulp.series(gulp.parallel('CSS', 'JS', buildHTML), deployFTP);
+const ftpProcess = gulp.series(gulp.parallel('CSS', 'JS', 'HTML'), deployFTP);
 gulp.task('FTP', ftpProcess);
 
 /*
