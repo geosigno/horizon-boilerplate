@@ -12,7 +12,6 @@ import ftp from 'vinyl-ftp';
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
 import webpackConfig from './webpack.config.js';
-import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import plumber from 'gulp-plumber';
 import concat from 'gulp-concat';
 import sass from 'gulp-sass';
@@ -89,7 +88,6 @@ export function clearJS() {
     return del(PATHS.DEST.js);
 }
 
-
 /*
   Clear HTML
 */
@@ -100,14 +98,16 @@ export function clearHTML() {
 /*
   PUG Lint
 */
-const nbErros = function (errors) {
-    if (errors.length) { console.error(errors.length) }
-}
+const nbErros = function(errors) {
+    if (errors.length) {
+        console.error(errors.length);
+    }
+};
 export const pugLint = () =>
     gulp
         .src(['app/pug/**/*.pug'])
         .pipe(pugLinter())
-        .pipe(pugLinter.reporter())
+        .pipe(pugLinter.reporter());
 
 /*
   convert SASS files to CSS
@@ -126,11 +126,7 @@ export const devSASS = () =>
                 includePaths: PATHS.SRC.sassAssets
             })
         )
-        .pipe(
-            autoprefixer({
-                browsers: ['> 1%', 'last 2 versions']
-            })
-        )
+        .pipe(autoprefixer())
         .pipe(gulp.dest(PATHS.DEST.css))
         .pipe(browserSync.reload({ stream: true }));
 
@@ -146,18 +142,32 @@ export const prodCSS = () =>
             })
         )
         .pipe(
-            cleanCSS({ debug: true }, details => {
-                console.log(
-                    `${details.name} was initialy ${Math.ceil(details.stats.originalSize / 1000)}Kb`
-                );
-                console.log(
-                    `${details.name} is now ${Math.ceil(details.stats.minifiedSize / 1000)}Kb`
-                );
-                console.log(
-                    `${Math.ceil(details.stats.originalSize / 1000) -
-                        Math.ceil(details.stats.minifiedSize / 1000)}Kb has been compressed`
-                );
-            })
+            cleanCSS(
+                {
+                    debug: true,
+                    level: {
+                        2: {
+                            mergeSemantically: false, // controls semantic merging; defaults to true
+                            restructureRules: false // controls rule restructuring; defaults to false
+                            //removeUnusedAtRules: true // controls unused at rule removing; defaults to false (available since 4.1.0)
+                        }
+                    }
+                },
+                (details) => {
+                    console.log(
+                        `${details.name} was initialy ${Math.ceil(
+                            details.stats.originalSize / 1000
+                        )}Kb`
+                    );
+                    console.log(
+                        `${details.name} is now ${Math.ceil(details.stats.minifiedSize / 1000)}Kb`
+                    );
+                    console.log(
+                        `${Math.ceil(details.stats.originalSize / 1000) -
+                            Math.ceil(details.stats.minifiedSize / 1000)}Kb has been compressed`
+                    );
+                }
+            )
         )
         .pipe(header(banner, { pkg: pkg, now: now }))
         .pipe(rename({ suffix: '.min' }))
@@ -181,8 +191,7 @@ export const devJS = () =>
 */
 export function updateWebpackConfig() {
     return new Promise(function(resolve, reject) {
-        if (!webpackConfig.plugins) webpackConfig.plugins = [];
-        webpackConfig.plugins.push(new UglifyJsPlugin());
+        webpackConfig.mode = 'production';
         resolve();
     });
 }
@@ -225,26 +234,27 @@ export const minifyICON = () =>
 /*
   Generate Icons font file and css
 */
+let fontName = pkg.name + '-icon-font';
 export const buildICON = () =>
     gulp
         .src(PATHS.SRC.icon, { base: 'app/' })
         .pipe(
             iconfontCss({
-                fontName: pkg.name + '-icon-font',
+                fontName: fontName,
                 path: 'app/sass/template/icon-template.scss',
                 targetPath: '../../../app/sass/base/icons.scss',
-                fontPath: '../fonts/Icons/'
+                fontPath: '../fonts/icons/'
             })
         )
         .pipe(
             iconfont({
-                fontName: pkg.name + '-icon-font',
+                fontName: fontName,
                 fontHeight: 1000,
                 formats: ['woff2', 'woff', 'ttf'],
                 normalize: true
             })
         )
-        .pipe(gulp.dest(PATHS.DEST.font))
+        .pipe(gulp.dest(PATHS.DEST.font + '/icons/'))
         .pipe(browserSync.reload({ stream: true }));
 
 /*
@@ -328,7 +338,7 @@ gulp.task('JS', js);
 /*
   TASK: CSS Full Process
 */
-const css = gulp.series(clearCSS,minifyICON, buildICON, devSASS, prodCSS);
+const css = gulp.series(clearCSS, minifyICON, buildICON, devSASS, prodCSS);
 gulp.task('CSS', css);
 
 /*

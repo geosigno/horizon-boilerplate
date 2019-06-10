@@ -1,12 +1,11 @@
 @font-face {
-	font-family: "<%= fontName %>";
+	font-family: "<%= fontName %>", sans-serif;
 	src: url('<%= fontPath %><%= fontName %>.woff2') format('woff2'),
-		url('<%= fontPath %><%= fontName %>.woff') format('woff'),
-		url('<%= fontPath %><%= fontName %>.ttf') format('truetype');
+		url('<%= fontPath %><%= fontName %>.woff') format('woff')
 }
 
 .<%= cssClass%> {
-	font-family: "<%= fontName %>";
+	font-family: "<%= fontName %>", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-style: normal;

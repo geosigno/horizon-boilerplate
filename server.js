@@ -17,7 +17,7 @@ app.set('views', path.join(__dirname, 'app/pug'));
 app.set('view engine', 'pug');
 
 // app.use(favicon(__dirname + '/build/img/favicon.ico'));
-app.use(logger('dev'));  
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'build')));

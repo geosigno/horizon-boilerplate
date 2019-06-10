@@ -1,12 +1,11 @@
 @font-face {
-    font-family: 'icon-font';
-    src: url('../fonts/icon-font.woff2') format('woff2'),
-        url('../fonts/icon-font.woff') format('woff'),
-        url('../fonts/icon-font.ttf') format('truetype');
+    font-family: 'horizon-boilerplate-icon-font', sans-serif;
+    src: url('../fonts/icons/horizon-boilerplate-icon-font.woff2') format('woff2'),
+        url('../fonts/icons/horizon-boilerplate-icon-font.woff') format('woff');
 }
 
 .icon {
-    font-family: 'icon-font';
+    font-family: 'horizon-boilerplate-icon-font', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-style: normal;

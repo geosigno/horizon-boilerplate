@@ -1,12 +1,16 @@
 {
     "name": "horizon-boilerplate",
     "version": "1.0.0",
-    "description": "Front-End Boilerplate is a starter kit that uses Gulp 4, Express.js, Webpack/Babel/ES6, SASS, PUG and foundation-sites framework",
+    "description": "Horizon Boilerplate is a starter kit that uses Gulp 4, Express.js, Webpack/Babel/ES6, SASS, PUG, Lint and foundation-sites framework",
     "author": "Geoffrey Signorato <geoffrey.signorato@gmail.com>",
     "contributors": [
         {
             "name": "Burel Kiady Bezaka Razafindrabe",
             "email": "kiadyrazafindrabe@gmail.com"
+        },
+        {
+            "name": "Shazad Mohammud Rusmaully",
+            "email": "shezad.demonoid@gmail.com"
         }
     ],
     "license": "MIT",
@@ -18,7 +22,7 @@
         "format": "prettier --write 'app/{sass,js,routes}/**/*.{scss,js}'",
         "formatConfig": "prettier --write '{gulpfile.babel.js,package.json,webpack.config.js,.prettierrc,.eslintrc.js,server.js}'",
         "eslint": "eslint app/js/ --ext .js --fix",
-        "stylelint": "stylelint app/sass/app.scss --fix"
+        "stylelint": "stylelint app/sass/**/*.scss --fix"
     },
     "husky": {
         "hooks": {
