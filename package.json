@@ -19,6 +19,7 @@
         "format": "prettier --write 'app/{sass,js,routes}/**/*.{scss,js}'",
         "formatConfig": "prettier --write '{gulpfile.babel.js,package.json,webpack.config.js,.prettierrc,server.js}'"
         "eslint": "eslint app/js/ --ext .js --fix",
+        "stylelint": "stylelint app/sass/app.scss --fix"
     },
     "lint-staged": {
         "app/{sass,js,routes}/**/*.{scss,js}": [
@@ -35,6 +36,7 @@
         "lint-staged": "^7.2.2",
         "morgan": "^1.9.1",
         "pug": "^2.0.3"
+        "stylelint-config-standard": "^18.3.0"
     },
     "devDependencies": {
         "babel-core": "^6.26.3",
@@ -58,7 +60,6 @@
         "gulp-iconfont-css": "^2.3.0",
         "gulp-nodemon": "^2.4.2",
         "gulp-plumber": "^1.2.1",
-        "gulp-postcss": "^8.0.0",
         "gulp-pug": "^4.0.1",
         "gulp-pug-linter": "^0.6.0",
         "gulp-rename": "^1.4.0",
@@ -70,11 +71,14 @@
         "jquery": "^3.3.1",
         "moment": "^2.22.2",
         "path": "^0.12.7",
-        "postcss-reporter": "^6.0.0",
+        "postcss-reporter": "^6.0.1",
         "postcss-scss": "^2.0.0",
         "prettier": "^1.15.3",
         "serve-favicon": "^2.4.5",
-        "stylelint": "^9.9.0",
+        "stylelint": "^10.1.0",
+        "stylelint-config-prettier": "^5.2.0",
+        "stylelint-config-recommended": "^2.2.0",
+        "stylelint-prettier": "^1.1.1",
         "vinyl-ftp": "^0.6.1",
         "webpack": "^4.27.1",
         "webpack-stream": "^5.2.1"

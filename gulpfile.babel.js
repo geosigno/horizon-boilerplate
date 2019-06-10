@@ -26,10 +26,6 @@ import iconfontCss from 'gulp-iconfont-css';
 import nodemon from 'gulp-nodemon';
 import zip from 'gulp-zip';
 import svgmin from 'gulp-svgmin';
-import postcss from 'gulp-postcss';
-import reporter from 'postcss-reporter';
-import syntax_scss from 'postcss-scss';
-import stylelint from 'stylelint';
 import moment from 'moment';
 import pugLinter from 'gulp-pug-linter';
 import del from 'del';
@@ -42,7 +38,6 @@ const PATHS = {
         pug: ['app/pug/pages/*.pug'],
         sass: ['app/sass/app.scss'],
         sassAssets: ['node_modules/foundation-sites/scss', 'node_modules/motion-ui/src'],
-        sassLint: ['app/sass/**/*.scss', '!app/sass/_settings.scss', '!app/sass/template/*.scss'],
         js: ['app/js/app.js'],
         icon: ['app/icons/*.svg'],
         zip: ['build/scripts/*.min.js', 'build/styles/*.min.css', 'build/fonts/']
@@ -260,31 +255,6 @@ export const zipMEDIA = () =>
         .src(PATHS.SRC.zip)
         .pipe(zip(pkg.name + '-media.zip'))
         .pipe(gulp.dest(PATHS.DEST.build));
-
-/*
-  SASS Lint
-*/
-const processors = [
-    stylelint(),
-    reporter({
-        clearMessages: true,
-        throwError: true
-    })
-];
-
-export const sassLint = () =>
-    gulp
-        .src(PATHS.SRC.sassLint)
-        .pipe(
-            plumber({
-                errorHandler: onError
-            })
-        )
-        .pipe(
-            postcss(processors, {
-                syntax: syntax_scss
-            })
-        );
 
 /*
   FTP Deployment

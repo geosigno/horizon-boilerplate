@@ -6,10 +6,5 @@
     "trailingComma": "none",
     "jsxBracketSameLine": false,
     "semi": true,
-    "overrides": [
-        {
-            "files": "app/sass/**/*.scss",
-            "options": { "tabWidth": 4 }
-        }
-    ]
+    "arrowParens": "always"
 }
