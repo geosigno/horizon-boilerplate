@@ -26,7 +26,6 @@ import iconfontCss from 'gulp-iconfont-css';
 import nodemon from 'gulp-nodemon';
 import zip from 'gulp-zip';
 import svgmin from 'gulp-svgmin';
-import eslint from 'gulp-eslint';
 import postcss from 'gulp-postcss';
 import reporter from 'postcss-reporter';
 import syntax_scss from 'postcss-scss';
@@ -286,16 +285,6 @@ export const sassLint = () =>
                 syntax: syntax_scss
             })
         );
-
-/*
-  ES Lint
-*/
-export const esLint = () =>
-    gulp
-        .src(['app/js/**/*.js'])
-        .pipe(eslint())
-        .pipe(eslint.format())
-        .pipe(eslint.failAfterError());
 
 /*
   FTP Deployment
