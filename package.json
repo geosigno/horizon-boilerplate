@@ -21,9 +21,18 @@
         "eslint": "eslint app/js/ --ext .js --fix",
         "stylelint": "stylelint app/sass/app.scss --fix"
     },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
     "lint-staged": {
-        "app/{sass,js,routes}/**/*.{scss,js}": [
-            "prettier --write",
+        "app/js/**/*.js": [
+            "eslint --fix",
+            "git add"
+        ],
+        "app/sass/**/*.scss": [
+            "stylelint --fix",
             "git add"
         ]
     },
