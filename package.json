@@ -20,7 +20,7 @@
     },
     "scripts": {
         "format": "prettier --write 'app/{sass,js,routes}/**/*.{scss,js}'",
-        "formatConfig": "prettier --write '{gulpfile.babel.js,package.json,webpack.config.js,.prettierrc,.eslintrc.js,server.js}'",
+        "formatConfig": "prettier --write '*.{js,json,md}'",
         "eslint": "eslint app/js/ --ext .js --fix",
         "stylelint": "stylelint app/sass/**/*.scss --fix"
     },
@@ -42,12 +42,12 @@
     "dependencies": {
         "body-parser": "^1.19.0",
         "browser-sync": "^2.26.7",
-        "del": "^4.1.1",
+        "del": "^5.0.0",
         "express": "^4.17.1",
         "gulp-cli": "^2.2.0",
-        "lint-staged": "^8.2.0",
+        "lint-staged": "^9.0.2",
         "morgan": "^1.9.1",
-        "pug": "^2.0.3",
+        "pug": "^2.0.4",
         "stylelint-config-standard": "^18.3.0"
     },
     "devDependencies": {
@@ -55,10 +55,10 @@
         "babel-loader": "^7.1.5",
         "babel-preset-env": "^1.7.0",
         "beeper": "^2.0.0",
-        "eslint": "^5.16.0",
-        "eslint-config-airbnb-base": "^13.1.0",
-        "eslint-config-prettier": "^4.3.0",
-        "eslint-plugin-import": "^2.17.3",
+        "eslint": "^6.0.1",
+        "eslint-config-airbnb-base": "^13.2.0",
+        "eslint-config-prettier": "^6.0.0",
+        "eslint-plugin-import": "^2.18.0",
         "eslint-plugin-prettier": "^3.1.0",
         "fancy-log": "^1.3.3",
         "foundation-sites": "^6.5.3",
@@ -72,13 +72,13 @@
         "gulp-nodemon": "^2.4.2",
         "gulp-plumber": "^1.2.1",
         "gulp-pug": "^4.0.1",
-        "gulp-pug-linter": "^1.1.0",
+        "gulp-pug-linter": "^1.2.0",
         "gulp-rename": "^1.4.0",
         "gulp-replace": "^1.0.0",
         "gulp-sass": "^4.0.2",
         "gulp-svgmin": "^2.2.0",
         "gulp-zip": "^5.0.0",
-        "husky": "^2.4.0",
+        "husky": "^3.0.0",
         "jquery": "^3.4.1",
         "moment": "^2.24.0",
         "path": "^0.12.7",
@@ -91,7 +91,7 @@
         "stylelint-config-recommended": "^2.2.0",
         "stylelint-prettier": "^1.1.1",
         "vinyl-ftp": "^0.6.1",
-        "webpack": "^4.33.0",
+        "webpack": "^4.35.2",
         "webpack-stream": "^5.2.1"
     }
 }
