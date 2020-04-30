@@ -79,7 +79,7 @@
         "gulp-svgmin": "^2.2.0",
         "gulp-zip": "^5.0.0",
         "husky": "^3.0.0",
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "moment": "^2.24.0",
         "path": "^0.12.7",
         "postcss-reporter": "^6.0.1",
