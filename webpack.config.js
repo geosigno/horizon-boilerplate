@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
     entry: './app/js/app.js',
+    mode: 'development',
     output: {
         filename: 'app.js',
         path: path.resolve(__dirname, 'build/scripts/')
@@ -11,10 +12,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
-                loader: 'babel-loader',
-                query: {
-                    presets: [['env', { modules: false }]]
-                }
+                loader: 'babel-loader'
             }
         ]
     }

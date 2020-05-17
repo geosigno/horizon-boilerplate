@@ -3,31 +3,31 @@
 /*
   Imports
 */
-import gulp from 'gulp';
-import browserSync from 'browser-sync';
-import pkg from './package.json';
-import beeper from 'beeper';
-import log from 'fancy-log';
-import ftp from 'vinyl-ftp';
-import webpack from 'webpack';
-import webpackStream from 'webpack-stream';
-import webpackConfig from './webpack.config.js';
-import plumber from 'gulp-plumber';
-import concat from 'gulp-concat';
-import sass from 'gulp-sass';
-import autoprefixer from 'gulp-autoprefixer';
-import cleanCSS from 'gulp-clean-css';
-import header from 'gulp-header';
-import rename from 'gulp-rename';
-import pug from 'gulp-pug';
-import iconfont from 'gulp-iconfont';
-import iconfontCss from 'gulp-iconfont-css';
-import nodemon from 'gulp-nodemon';
-import zip from 'gulp-zip';
-import svgmin from 'gulp-svgmin';
-import moment from 'moment';
-import pugLinter from 'gulp-pug-linter';
-import del from 'del';
+const gulp = require('gulp');
+const browserSync = require('browser-sync');
+const pkg = require('./package.json');
+const beeper = require('beeper');
+const log = require('fancy-log');
+const ftp = require('vinyl-ftp');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
+const webpackConfig = require('./webpack.config.js');
+const plumber = require('gulp-plumber');
+const concat = require('gulp-concat');
+const sass = require('gulp-sass');
+const autoprefixer = require('gulp-autoprefixer');
+const cleanCSS = require('gulp-clean-css');
+const header = require('gulp-header');
+const rename = require('gulp-rename');
+const pug = require('gulp-pug');
+const iconfont = require('gulp-iconfont');
+const iconfontCss = require('gulp-iconfont-css');
+const nodemon = require('gulp-nodemon');
+const zip = require('gulp-zip');
+const svgmin = require('gulp-svgmin');
+const moment = require('moment');
+const pugLinter = require('gulp-pug-linter');
+const del = require('del');
 
 /*
   Paths
@@ -68,51 +68,47 @@ const banner = [
 /*
   Error catcher
 */
-export function onError(err) {
+const onError = (err) => {
     beeper(2);
     console.log(err);
     this.emit('end');
-}
+};
 
 /*
   Clear CSS
 */
-export function clearCSS() {
+const clearCSS = () => {
     return del(PATHS.DEST.css);
-}
+};
 
 /*
   Clear JS
 */
-export function clearJS() {
+const clearJS = () => {
     return del(PATHS.DEST.js);
-}
+};
 
 /*
   Clear HTML
 */
-export function clearHTML() {
+const clearHTML = () => {
     return del(PATHS.DEST.html);
-}
+};
 
 /*
   PUG Lint
 */
-const nbErros = function(errors) {
+const nbErros = (errors) => {
     if (errors.length) {
         console.error(errors.length);
     }
 };
-export const pugLint = () =>
-    gulp
-        .src(['app/pug/**/*.pug'])
-        .pipe(pugLinter())
-        .pipe(pugLinter.reporter());
+const pugLint = () => gulp.src(['app/pug/**/*.pug']).pipe(pugLinter()).pipe(pugLinter.reporter());
 
 /*
   convert SASS files to CSS
 */
-export const devSASS = () =>
+const devSASS = () =>
     gulp
         .src(PATHS.SRC.sass)
         .pipe(
@@ -133,7 +129,7 @@ export const devSASS = () =>
 /*
   CSS production
 */
-export const prodCSS = () =>
+const prodCSS = () =>
     gulp
         .src(PATHS.DEST.css + '/app.css')
         .pipe(
@@ -163,8 +159,10 @@ export const prodCSS = () =>
                         `${details.name} is now ${Math.ceil(details.stats.minifiedSize / 1000)}Kb`
                     );
                     console.log(
-                        `${Math.ceil(details.stats.originalSize / 1000) -
-                            Math.ceil(details.stats.minifiedSize / 1000)}Kb has been compressed`
+                        `${
+                            Math.ceil(details.stats.originalSize / 1000) -
+                            Math.ceil(details.stats.minifiedSize / 1000)
+                        }Kb has been compressed`
                     );
                 }
             )
@@ -176,33 +174,27 @@ export const prodCSS = () =>
 /*
   JS webpack Bundle
 */
-export const devJS = () =>
+const devJS = () =>
     gulp
         .src(PATHS.SRC.js)
-        .pipe(
-            webpackStream(webpackConfig),
-            webpack
-        )
+        .pipe(webpackStream(webpackConfig), webpack)
         .pipe(gulp.dest(PATHS.DEST.js))
         .pipe(browserSync.reload({ stream: true }));
 
 /*
   JS production
 */
-export function updateWebpackConfig() {
-    return new Promise(function(resolve, reject) {
+const updateWebpackConfig = () => {
+    return new Promise(function (resolve, reject) {
         webpackConfig.mode = 'production';
         resolve();
     });
-}
+};
 
-export const prodJS = () =>
+const prodJS = () =>
     gulp
         .src(PATHS.SRC.js)
-        .pipe(
-            webpackStream(webpackConfig),
-            webpack
-        )
+        .pipe(webpackStream(webpackConfig), webpack)
         .pipe(header(banner, { pkg: pkg, now: now }))
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(PATHS.DEST.js));
@@ -210,7 +202,7 @@ export const prodJS = () =>
 /*
   PUG to HTML
 */
-export const buildHTML = () =>
+const buildHTML = () =>
     gulp
         .src(PATHS.SRC.pug)
         .pipe(
@@ -225,17 +217,13 @@ export const buildHTML = () =>
 /*
   Minify SVG icon files
 */
-export const minifyICON = () =>
-    gulp
-        .src(PATHS.SRC.icon)
-        .pipe(svgmin())
-        .pipe(gulp.dest(PATHS.DEST.icon));
+const minifyICON = () => gulp.src(PATHS.SRC.icon).pipe(svgmin()).pipe(gulp.dest(PATHS.DEST.icon));
 
 /*
   Generate Icons font file and css
 */
 let fontName = pkg.name + '-icon-font';
-export const buildICON = () =>
+const buildICON = () =>
     gulp
         .src(PATHS.SRC.icon, { base: 'app/' })
         .pipe(
@@ -260,7 +248,7 @@ export const buildICON = () =>
 /*
   ZIP the Medias
 */
-export const zipMEDIA = () =>
+const zipMEDIA = () =>
     gulp
         .src(PATHS.SRC.zip)
         .pipe(zip(pkg.name + '-media.zip'))
@@ -278,7 +266,7 @@ const conn = ftp.create({
     }),
     globs = ['build/**'];
 
-export const deployFTP = () =>
+const deployFTP = () =>
     gulp
         .src(globs, { base: '.', buffer: false })
         .pipe(conn.newer('/build_html')) // only upload newer files
@@ -287,7 +275,7 @@ export const deployFTP = () =>
 /*
   GULP server
 */
-export const develop = () =>
+const develop = () =>
     nodemon({
         script: './server.js',
         ext: 'js',
@@ -301,7 +289,7 @@ export const develop = () =>
 /*
   GULP BROWSERSYNC
 */
-export const launchBrowserSync = () =>
+const launchBrowserSync = () =>
     browserSync.init(null, {
         proxy: 'http://localhost:3000',
         browser: 'chrome',
@@ -322,7 +310,7 @@ export const launchBrowserSync = () =>
 /*
   GULP Watch
 */
-export const watch = () => {
+const watch = () => {
     gulp.watch(PATHS.SRC.pug, buildHTML);
     gulp.watch('./app/sass/**/*.scss', { interval: 1000 }, devSASS);
     gulp.watch('./app/js/**/*.js', { interval: 1000 }, devJS);
@@ -366,5 +354,5 @@ const build = gulp.series(
     gulp.parallel(gulp.series(buildICON, devSASS), devJS),
     gulp.parallel(launchBrowserSync, develop, watch)
 );
-gulp.task('build', build);
-export default build;
+
+exports.default = build;
