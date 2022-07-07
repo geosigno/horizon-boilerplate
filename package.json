@@ -80,7 +80,7 @@
         "gulp-zip": "^5.0.1",
         "husky": "^4.2.5",
         "jquery": "^3.5.1",
-        "moment": "^2.25.3",
+        "moment": "^2.29.4",
         "path": "^0.12.7",
         "postcss-reporter": "^6.0.1",
         "postcss-scss": "^2.1.0",
